@@ -22,29 +22,38 @@
 
 ## Установка
 
-*1. Создайте виртуальное окружение:*
-
-   `bash
+**1. Создайте виртуальное окружение:**
+```
+   bash
    python -m venv venv
    source venv/bin/activate  # Для Linux/macOS
    # или
-   venv\Scripts\activate     # Для Windows`
+   venv\Scripts\activate     # Для Windows
+```
 
-*2. Установите PyTorch с поддержкой CUDA:*
+**2. Установите PyTorch с поддержкой CUDA:**
 
-*Проверяем поддерживаемую версию:*
+**2.1. Проверяем поддерживаемую версию:**
 
-`nvidia-smi`
+```
+nvidia-smi
+```
 
-*Устанавливаем стабильную поддерживаемую свежую версию:*
+**2.2. Устанавливаем стабильную поддерживаемую свежую версию:**
 
-`pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124`
+```
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+```
 
-*Запукскаем проверку:*
+**2.3. Запукскаем проверку:**
 
-`python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA version: {torch.version.cuda}')"`
+```
+python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA version: {torch.version.cuda}')"
+```
 
-*3. Установите остальные зависимости:*
+**3. Установите остальные зависимости:**
 
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
