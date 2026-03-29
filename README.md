@@ -83,28 +83,38 @@ python -m venv venv
 source venv/bin/activate  # Для Linux/macOS
 # или
 venv\Scripts\activate     # Для Windows
+```
 
 ### 2. Установка PyTorch с поддержкой CUDA**
 
 **2.1. Проверяем поддерживаемую версию:**
+
 ```
 nvidia-smi
 ```
+
 **2.2. Устанавливаем стабильную версию:**
+
 ```
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 ```
+
 **2.3. Проверка установки:**
+
 ```
 python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA version: {torch.version.cuda}')"
 ```
+
 ### 3. Установка остальных зависимостей:
+
 ```
 pip install -r requirements.txt
 ```
 
 ## Использование
+
 ### Обучение модели
+
 ```
 python src/train.py
 ```
@@ -121,18 +131,22 @@ python src/train.py
 - history.json — метрики по эпохам
 
 ## Оценка модели
+
 ```
 python src/evaluate.py
 ```
+
 **Генерирует:**
 
 - evaluation_results.json — полные метрики (precision, recall, F1)
 - confusion_matrix.png — визуализация матрицы ошибок
 
 ## Предсказание на новых изображениях
+
 ```
 python src/predict.py <путь_к_изображению> [путь_к_модели]
 ```
+
 **Примеры:**
 
 ```
@@ -142,6 +156,7 @@ python src/predict.py sneaker.jpg
 # С указанием конкретной модели
 python src/predict.py dress.jpg best_model.pth
 ```
+
 ## Особенности предобработки:
 
 - Автоматическая инверсия цветов (для соответствия FashionMNIST)
@@ -150,6 +165,7 @@ python src/predict.py dress.jpg best_model.pth
 - Сохранение debug_processed.png для проверки
 
 ## Пример вывода:
+
 ```
 Using device: cuda
 Loading model from best_model.pth...
@@ -173,10 +189,13 @@ Top 3 predictions:
 
 Debug: Processed image saved to 'debug_processed.png'
 ```
+
 ## Визуализация истории обучения
+
 ```
 python src/plot_history.py
 ```
+
 **Генерирует: `training_plots.png` с графиками `Loss` и `Accuracy`**
 
 ## Воспроизводимость
