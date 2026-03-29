@@ -4,7 +4,7 @@ from PIL import Image, ImageOps, ImageChops
 from torchvision import transforms
 import sys
 import os
-
+import numpy as np
 # Импортируем нашу модель
 from model import get_model
 
@@ -42,9 +42,25 @@ def predict_image(image_path, model, device):
     # 1. Открываем и переводим в ч/б
     image = Image.open(image_path).convert('L')
 
-    # 2. Инвертируем цвета (FashionMNIST: светлый объект на ЧЕРНОМ фоне)
-    # Почти все фото из интернета имеют светлый фон, поэтому инверсия обязательна
-    image = ImageOps.invert(image)
+    # 2. Умная инверсия (FashionMNIST: светлый объект на ЧЕРНОМ фоне)
+    # Проверяем среднюю яркость пикселей по краям
+    data = np.array(image)
+    # Исправленный расчет средней яркости краев:
+    edge_brightness = np.mean([
+        np.mean(data[0,:]),   # верхняя грань
+        np.mean(data[-1,:]),  # нижняя грань
+        np.mean(data[:,0]),   # левая грань
+        np.mean(data[:,-1])   # правая грань
+    ])
+
+
+    # Если фон светлее среднего (яркость > 127), инвертируем
+    if edge_brightness > 127:
+        image = ImageOps.invert(image)
+        print("Detected light background -> Inverting to black")
+    else:
+        print("Detected dark background -> Skipping inversion")
+
 
     # 3. Авто-обрезка лишнего фона (Crop)
     # Находим границы объекта и обрезаем пустоту вокруг
