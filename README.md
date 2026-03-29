@@ -47,7 +47,7 @@
 - **Scheduler**: ReduceLROnPlateau (factor=0.5, patience=2)
 
 ## Структура проекта
-``
+```
 product-classification/
 ├── data/ # Датасеты (скачиваются автоматически)
 ├── src/
@@ -67,7 +67,7 @@ product-classification/
 ├── debug_processed.png # Обработанное изображение (для отладки)
 ├── requirements.txt # Зависимости
 └── README.md
-``
+```
 ## Требования
 
 - Python: 3.12+
